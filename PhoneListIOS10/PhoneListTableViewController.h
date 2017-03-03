@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  PhoneListTableViewController.h
 //  PhoneListIOS10
 //
 //  Created by iMac on 03.03.17.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface PhoneListTableViewController : UITableViewController
 
 @end
-
