@@ -10,6 +10,8 @@
 #import <CoreData/CoreData.h>
 #import "MNUser+CoreDataClass.h"
 #import "MNDataManager.h"
+#import "AddUserTableViewController.h"
+#import "UserTableViewCell.h"
 
 @interface PhoneListTableViewController ()
 
@@ -44,80 +46,105 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [self reloadTableView];
+    
+}
+
+#pragma mark - Support
+
+- (void) reloadTableView {
+    
+    self.users = [[MNDataManager sharedManager] allObjects];
+    [self.tableView reloadData];
+    
+}
+
 #pragma mark - Actions
 
 - (void) actionAddUser:(UIBarButtonItem*) item {
     
-    NSLog(@"OK!");
+    AddUserTableViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AddUserTableViewController"];
+    
+    [self.navigationController pushViewController:vc
+                                         animated:YES];
     
 }
 
 - (void) actionRemoveAllUsers:(UIBarButtonItem*) item {
     
-    NSLog(@"Remove!");
+    if ([self.users count]) {
+        
+        
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Warning!"
+                                                                       message:@"Delete all users?"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* deleteAction = [UIAlertAction actionWithTitle:@"Delete all!"
+                                                               style:UIAlertActionStyleDestructive
+                                                             handler:^(UIAlertAction * _Nonnull action) {
+                                                                 [[MNDataManager sharedManager] deleteAllObjects];
+                                                                 [self reloadTableView];
+                                                             }];
+        
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel!"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:nil];
+        [alert addAction:cancelAction];
+        [alert addAction:deleteAction];
+        
+        [self presentViewController:alert
+                           animated:YES
+                         completion:nil];
+        
+    }
+
     
 }
 
-#pragma mark - Table view data source
-
+#pragma mark - UITableViewDataSource
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.users count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    static NSString* identifier = @"UserTableViewCell";
+    
+    UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    
+    if (!cell) {
+        
+        cell = [[UserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                        reuseIdentifier:identifier];
+        
+    }
+    
+    MNUser* user = self.users[indexPath.row];
+    
+    cell.firstNameLabel.text = user.firstName;
+    cell.lastNameLabel.text = user.lastName;
+    cell.emailLabel.text = user.email;
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+#pragma mark - UITableViewDelegate
 
-/*
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    
+    MNUser* user = self.users[indexPath.row];
+
+    [[[[MNDataManager sharedManager] persistentContainer] viewContext] deleteObject:user];
+    [[MNDataManager sharedManager] saveContext];
+    
+    self.users = [[MNDataManager sharedManager] allObjects];
+    
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

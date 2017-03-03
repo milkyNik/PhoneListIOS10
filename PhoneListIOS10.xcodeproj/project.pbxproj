@@ -15,6 +15,8 @@
 		88D2BA561E699A350040B331 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88D2BA541E699A350040B331 /* LaunchScreen.storyboard */; };
 		88D2BA5F1E699CAB0040B331 /* PhoneListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D2BA5E1E699CAB0040B331 /* PhoneListTableViewController.m */; };
 		88D2BA671E69A1D30040B331 /* MNDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D2BA661E69A1D30040B331 /* MNDataManager.m */; };
+		88D2BA6B1E69B7C70040B331 /* AddUserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D2BA6A1E69B7C70040B331 /* AddUserTableViewController.m */; };
+		88D2BA6E1E69CF360040B331 /* UserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D2BA6D1E69CF360040B331 /* UserTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,10 @@
 		88D2BA5E1E699CAB0040B331 /* PhoneListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneListTableViewController.m; sourceTree = "<group>"; };
 		88D2BA651E69A1D30040B331 /* MNDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNDataManager.h; sourceTree = "<group>"; };
 		88D2BA661E69A1D30040B331 /* MNDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNDataManager.m; sourceTree = "<group>"; };
+		88D2BA691E69B7C70040B331 /* AddUserTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddUserTableViewController.h; sourceTree = "<group>"; };
+		88D2BA6A1E69B7C70040B331 /* AddUserTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddUserTableViewController.m; sourceTree = "<group>"; };
+		88D2BA6C1E69CF360040B331 /* UserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTableViewCell.h; sourceTree = "<group>"; };
+		88D2BA6D1E69CF360040B331 /* UserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +71,7 @@
 			children = (
 				88D2BA461E699A350040B331 /* AppDelegate.h */,
 				88D2BA471E699A350040B331 /* AppDelegate.m */,
+				88D2BA6F1E69CF3E0040B331 /* TableViewCell */,
 				88D2BA681E69A1D70040B331 /* CoreDataManager */,
 				88D2BA601E699CB20040B331 /* ViewControllers */,
 				88D2BA521E699A350040B331 /* Assets.xcassets */,
@@ -90,6 +97,8 @@
 			children = (
 				88D2BA5D1E699CAB0040B331 /* PhoneListTableViewController.h */,
 				88D2BA5E1E699CAB0040B331 /* PhoneListTableViewController.m */,
+				88D2BA691E69B7C70040B331 /* AddUserTableViewController.h */,
+				88D2BA6A1E69B7C70040B331 /* AddUserTableViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -101,6 +110,15 @@
 				88D2BA661E69A1D30040B331 /* MNDataManager.m */,
 			);
 			name = CoreDataManager;
+			sourceTree = "<group>";
+		};
+		88D2BA6F1E69CF3E0040B331 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				88D2BA6C1E69CF360040B331 /* UserTableViewCell.h */,
+				88D2BA6D1E69CF360040B331 /* UserTableViewCell.m */,
+			);
+			name = TableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,8 +193,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88D2BA6E1E69CF360040B331 /* UserTableViewCell.m in Sources */,
 				88D2BA511E699A350040B331 /* PhoneListIOS10.xcdatamodeld in Sources */,
 				88D2BA481E699A350040B331 /* AppDelegate.m in Sources */,
+				88D2BA6B1E69B7C70040B331 /* AddUserTableViewController.m in Sources */,
 				88D2BA671E69A1D30040B331 /* MNDataManager.m in Sources */,
 				88D2BA5F1E699CAB0040B331 /* PhoneListTableViewController.m in Sources */,
 				88D2BA451E699A350040B331 /* main.m in Sources */,
